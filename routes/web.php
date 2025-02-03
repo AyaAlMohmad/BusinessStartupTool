@@ -6,6 +6,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProgressAnalyticsController;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +20,16 @@ use App\Http\Controllers\ProgressAnalyticsController;
 |
 */
 
+Route::get('locale/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'ar'])) {
+        abort(400);
+    }
 
+    App::setLocale($locale);
+    Session::put('locale', $locale);
+
+    return redirect()->back();
+});
 
 Route::get('/', function () {
     return view('welcome');
