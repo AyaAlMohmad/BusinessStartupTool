@@ -81,7 +81,7 @@ table tbody tr:hover {
 <div class="dashboard">
     <div class="analyics">
         <div class="section-completion">
-            <h1>Section Completion Rates</h1>
+            <h1>{{ trans('messages.Section Completion Rates')}}</h1>
             @foreach ($sectionCompletion as $section => $percentage)
                 <div class="section">
                     <h2>{{ ucfirst(str_replace('_', ' ', $section)) }}</h2>
@@ -93,28 +93,28 @@ table tbody tr:hover {
             @endforeach
         </div>
         <div class="user-activity">
-            <h1>User Activity Trend</h1>
+            <h1>{{ trans('messages.User Activity Trend')}}</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>Period</th>
-                        <th>Active Users</th>
+                        <th>{{ trans('messages.Period')}}</th>
+                        <th>{{ trans('messages.Active Users')}}</th>
                         <th>%</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Last 24 Hours</td>
+                        <td>{{ trans('messages.Last 24 Hours')}}</td>
                         <td>{{ $userActivity['last_24_hours'] }}</td>
                         <td>{{ (($userActivity['last_24_hours'] / max($userActivity['last_30_days'], 1)) / 100) * 100 }}%</td>
                     </tr>
                     <tr>
-                        <td>Last 7 Days</td>
+                        <td>{{ trans('messages.Last 7 Days')}}</td>
                         <td>{{ $userActivity['last_7_days'] }}</td>
                         <td>{{ (($userActivity['last_7_days'] / max($userActivity['last_30_days'], 1)) / 100) * 100 }}%</td>
                     </tr>
                     <tr>
-                        <td>Last 30 Days</td>
+                        <td>{{ trans('messages.Last 30 Days')}}</td>
                         <td>{{ $userActivity['last_30_days'] }}</td>
                         <td>{{ (($userActivity['last_30_days'] / max($userActivity['last_30_days'], 1)) / 100) * 100 }}%</td>
                     </tr>
@@ -123,7 +123,7 @@ table tbody tr:hover {
         </div>
     </div>
     <div class="most-active-sections">
-        <h1>Most Active Sections</h1>
+        <h1>{{ trans('messages.Most Active Sections')}}</h1>
         <table>
             <tbody>
                 <tr>

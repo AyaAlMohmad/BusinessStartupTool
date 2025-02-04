@@ -170,7 +170,7 @@
 
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search users..." onkeyup="searchTable()" />
-            <button onclick="exportTableToCSV('users.csv')">Export Data</button>
+            <button onclick="exportTableToCSV('users.csv')">{{ trans('messages.Export Data') }}</button>
             <script>
                 function searchTable() {
                     var input = document.getElementById("searchInput");
@@ -227,13 +227,13 @@
         <table>
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Registration Date</th>
-                    <th>Last Login</th>
-                    <th>Progress</th>
-                    <th>Actions</th>
+                    <th>{{ trans('messages.Username') }}</th>
+                    <th>{{ trans('messages.Email')}}</th>
+                    <th>{{ trans('messages.Status')}}</th>
+                    <th>{{ trans('messages.Registration Date')}}</th>
+                    <th>{{ trans('messages.Last Login')}}</th>
+                    <th>{{ trans('messages.Progress')}}</th>
+                    <th>{{ trans('messages.Actions')}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -315,37 +315,37 @@
                                 <div class="modal-body">
                                     <!-- Name -->
                                     <div class="mb-3">
-                                        <label for="name-{{ $user->id }}" class="form-label">Name</label>
+                                        <label for="name-{{ $user->id }}" class="form-label">{{ trans('messages.Username') }}</label>
                                         <input type="text" class="form-control" id="name-{{ $user->id }}" name="name"
                                             value="{{ $user->name }}" required>
                                     </div>
 
                                     <!-- Email -->
                                     <div class="mb-3">
-                                        <label for="email-{{ $user->id }}" class="form-label">Email</label>
+                                        <label for="email-{{ $user->id }}" class="form-label">{{ trans('messages.Email') }}</label>
                                         <input type="email" class="form-control" id="email-{{ $user->id }}" name="email"
                                             value="{{ $user->email }}" required>
                                     </div>
 
                                     <!-- Status -->
                                     <div class="mb-3">
-                                        <label for="status-{{ $user->id }}" class="form-label">Status</label>
+                                        <label for="status-{{ $user->id }}" class="form-label">{{ trans('messages.Status') }}</label>
                                         <select class="form-select" id="status-{{ $user->id }}" name="status" required>
                                             <option value="active" {{ $user->status == 'active' ? 'selected' :
-                                                '' }}>Active</option>
+                                                '' }}>{{ trans('messages.Active')}}</option>
                                             <option value="inactive" {{ $user->status == 'inactive' ? 'selected' :
-                                                '' }}>InActive</option>
+                                                '' }}>{{ trans('messages.InActive')}}</option>
                                             <option value="blocked" {{ $user->status == 'blocked' ? 'selected' :
-                                                '' }}>Blocked</option>
+                                                '' }}>{{ trans('messages.Blocked')}}</option>
                                         </select>
                                     </div>
                                     <!-- Admin Status -->
                                     <div class="mb-3">
-                                        <label for="is_admin-{{ $user->id }}" class="form-label">User Role</label>
+                                        <label for="is_admin-{{ $user->id }}" class="form-label">{{ trans('messages.User Role')}}</label>
                                         <select class="form-select" id="is_admin-{{ $user->id }}" name="is_admin"
                                             required>
-                                            <option value="0" {{ $user->is_admin == 0 ? 'selected' : '' }}>User</option>
-                                            <option value="1" {{ $user->is_admin == 1 ? 'selected' : '' }}>Admin
+                                            <option value="0" {{ $user->is_admin == 0 ? 'selected' : '' }}>{{ trans('messages.User')}}</option>
+                                            <option value="1" {{ $user->is_admin == 1 ? 'selected' : '' }}>{{ trans('messages.Admin')}}
                                             </option>
                                         </select>
                                     </div>
@@ -353,8 +353,8 @@
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">Save Changes</button>
+                                        data-bs-dismiss="modal">{{ trans('messages.Close')}}</button>
+                                    <button type="submit" class="btn btn-success">{{ trans('messages.Save Changes')}}</button>
                                 </div>
                             </form>
                         </div>

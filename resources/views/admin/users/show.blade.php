@@ -5,18 +5,18 @@
                 <h1>User Details</h1>
             </div>
             <div class="card-body">
-                <p><strong>Username:</strong> {{ $user->username }}</p>
-                <p><strong>Email:</strong> {{ $user->email }}</p>
-                <p><strong>Status:</strong> 
+                <p><strong>{{ trans('messages.Username')}}:</strong> {{ $user->username }}</p>
+                <p><strong>{{ trans('messages.Email')}}:</strong> {{ $user->email }}</p>
+                <p><strong>{{ trans('messages.Status')}}:</strong> 
                     <span class="status-badge" style="background-color: {{ $user->status == 'active' ? '#28a745' : '#dc3545' }};">
                         {{ ucfirst($user->status) }}
                     </span>
                 </p>
-                <p><strong>Registration Date:</strong> {{ $user->created_at->format('d/m/Y') }}</p>
-                <p><strong>Last Login:</strong> {{ $user->last_login ? $user->last_login->format('d/m/Y') : 'Never' }}</p>
+                <p><strong>{{ trans('messages.Registration Date')}}:</strong> {{ $user->created_at->format('d/m/Y') }}</p>
+                <p><strong>{{ trans('messages.Last Login')}}:</strong> {{ $user->last_login ? $user->last_login->format('d/m/Y') : 'Never' }}</p>
             </div>
             <div class="card-footer">
-                <a href="{{ route('admin.users.index') }}" class="btn btn-primary">Back to User Management</a>
+                <a href="{{ route('admin.users.index') }}" class="btn btn-primary">{{ trans('messages.Back to User Management')}}</a>
             </div>
         </div>
     </div>

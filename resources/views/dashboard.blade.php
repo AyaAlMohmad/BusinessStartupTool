@@ -114,36 +114,37 @@
             text-align: center;
         }
     </style>
+
     <div class="dashboard">
         <div class="summary">
             <div class="summary-item">
-                <h3><i class="fas fa-dollar-sign icon"></i>Total Startup Costs</h3>
+                <h3><i class="fas fa-dollar-sign icon"></i>{{  trans('messages.Total Startup Costs') }}</h3>
                 <p>${{ $startupCosts->sum('amount') }}</p>
-                <span>Across all users</span>
+                <span>{{  trans('messages.Across all users') }}</span>
             </div>
             <div class="summary-item">
-                <h3><i class="fas fa-chart-line icon"></i>Average Startup Cost</h3>
+                <h3><i class="fas fa-chart-line icon"></i>{{  trans('messages.Average Startup Cost') }}</h3>
                 <p>${{ $startupCosts->avg('amount') }}</p>
-                <span>Per business</span>
+                <span>{{  trans('messages.Per business') }}</span>
             </div>
             <div class="summary-item">
-                <h3><i class="fas fa-hand-holding-usd icon"></i>Total Funding</h3>
+                <h3><i class="fas fa-hand-holding-usd icon"></i>{{  trans('messages.Total Funding') }}</h3>
                 <p>${{ $fundingSources->sum('amount') }}</p>
-                <span>All sources</span>
+                <span>{{  trans('messages.All sources') }}</span>
             </div>
             <div class="summary-item">
-                <h3><i class="fas fa-calendar-alt icon"></i>Avg. Breakeven</h3>
-                <p>0 months</p>
-                <span>Expected timeline</span>
+                <h3><i class="fas fa-calendar-alt icon"></i>{{  trans('messages.Avg. Breakeven') }}</h3>
+                <p>0 {{  trans('messages.months') }}</p>
+                <span>{{  trans('messages.Expected timeline') }}</span>
             </div>
         </div>
         <div class="details">
             <div class="funding-distribution">
-                <h3><i class="fas fa-piggy-bank icon"></i>Funding Distribution</h3>
+                <h3><i class="fas fa-piggy-bank icon"></i>{{  trans('messages.Funding Distribution') }}</h3>
                 <table>
                     <tr>
-                        <th>Source</th>
-                        <th>Amount</th>
+                        <th>{{  trans('messages.Source') }}</th>
+                        <th>{{  trans('messages.Amount') }}</th>
                         <th>%</th>
                     </tr>
                     @foreach ($fundingSources as $funding)
@@ -156,11 +157,11 @@
                 </table>
             </div>
             <div class="cost-categories">
-                <h3><i class="fas fa-coins icon"></i>Cost Categories</h3>
+                <h3><i class="fas fa-coins icon"></i>{{  trans('messages.Cost Categories') }}</h3>
                 <table>
                     <tr>
-                        <th>Category</th>
-                        <th>Amount</th>
+                        <th>{{  trans('messages.Category') }}</th>
+                        <th>{{  trans('messages.Amount') }}</th>
                         <th>%</th>
                     </tr>
                     @foreach ($startupCosts as $cost)
@@ -174,22 +175,23 @@
             </div>
         </div>
         <div class="funding-status">
-            <h3><i class="fas fa-chart-pie icon"></i>Funding Status Overview</h3>
+            <h3><i class="fas fa-chart-pie icon"></i>{{  trans('messages.Funding Status Overview') }}</h3>
             <div class="status-item">
-                <h4><i class="fas fa-tasks icon"></i>Planned</h4>
+                <h4><i class="fas fa-tasks icon"></i>{{  trans('messages.Planned') }}</h4>
                 <p>$0</p>
                 <span class="oval">0%</span>
             </div>
             <div class="status-item">
-                <h4><i class="fas fa-check-circle icon"></i>Secured</h4>
+                <h4><i class="fas fa-check-circle icon"></i>{{  trans('messages.Secured') }}</h4>
                 <p>${{ $fundingSources->sum('amount') }}</p>
                 <span class="oval-green">100%</span>
             </div>
             <div class="status-item">
-                <h4><i class="fas fa-hourglass-half icon"></i>Pending</h4>
+                <h4><i class="fas fa-hourglass-half icon"></i>{{  trans('messages.Pending') }}</h4>
                 <p>$0</p>
                 <span class="oval-orange">0%</span>
             </div>
         </div>
     </div>
+
 </x-app-layout>
