@@ -6,6 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 class MVPDevelopment extends Model
 {
     protected $table = 'mvp_developments';
+    protected $fillable = [
+        'user_id',
+        'description',
+    ];
+
+    protected $casts = [
+        'description' => 'array', 
+    ];
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function features()
     {

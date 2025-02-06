@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('license_permits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('business_setup_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->json('requirements');
-            $table->string('status');
-            $table->date('deadline');
+            $table->foreignId('business_setup_id')->constrained()->onDelete('cascade'); 
+            $table->unsignedBigInteger('user_id'); 
+            $table->json('name'); 
+            $table->json('requirements'); 
+            $table->json('status'); 
+            $table->date('deadline'); 
             $table->timestamps();
+
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

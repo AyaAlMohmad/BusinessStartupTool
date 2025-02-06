@@ -14,14 +14,25 @@ class MarketingActivity extends Model
         'budget',
         'status',
         'metrics',
+        'user_id',
     ];
 
     protected $casts = [
-        'metrics' => 'array',
+        'activity' => 'array', 
+        'timeline' => 'array', 
+        'status' => 'array', 
+        'metrics' => 'array', 
     ];
 
     public function launchPreparation()
     {
         return $this->belongsTo(LaunchPreparation::class);
     }
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

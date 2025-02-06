@@ -13,14 +13,18 @@ return new class extends Migration
     {
         Schema::create('launch_checklists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade');
-            $table->string('category');
-            $table->string('task');
+            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade'); 
+            $table->json('category'); 
+            $table->json('task'); 
             $table->date('due_date');
-            $table->string('status');
-            $table->string('assignee');
+            $table->json('status');
+            $table->string('assignee'); 
             $table->text('notes')->nullable();
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+          
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

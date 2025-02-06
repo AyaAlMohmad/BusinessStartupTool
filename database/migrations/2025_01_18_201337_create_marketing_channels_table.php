@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('marketing_channels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('marketing_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->text('strategy');
+            $table->json('name');
+            $table->json('strategy');
             $table->decimal('budget', 10, 2);
             $table->string('expected_roi');
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+         
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

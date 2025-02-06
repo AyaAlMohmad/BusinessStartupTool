@@ -13,14 +13,24 @@ class LaunchMilestone extends Model
         'due_date',
         'status',
         'dependencies',
+        'user_id',
     ];
 
     protected $casts = [
-        'dependencies' => 'array',
+        'description' => 'array', 
+        'dependencies' => 'array', 
     ];
 
+   
     public function launchPreparation()
     {
         return $this->belongsTo(LaunchPreparation::class);
     }
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

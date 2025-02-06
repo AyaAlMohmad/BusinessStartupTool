@@ -20,8 +20,12 @@ return new class extends Migration
             $table->json('must_have_solutions');
             $table->json('should_have_solutions');
             $table->json('nice_to_have_solutions');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+        
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+        
     }
 
     /**

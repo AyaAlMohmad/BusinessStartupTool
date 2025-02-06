@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('revenue_projections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade');
-            $table->string('month');
-            $table->decimal('amount', 10, 2);
+            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade')->index(); 
+            $table->unsignedBigInteger('user_id'); 
+            $table->date('month');
+            $table->decimal('amount', 15, 2); 
             $table->json('assumptions');
             $table->timestamps();
+
+        
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

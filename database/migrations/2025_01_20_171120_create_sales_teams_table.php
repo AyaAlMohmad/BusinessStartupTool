@@ -14,11 +14,15 @@ return new class extends Migration
         Schema::create('sales_teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sales_strategy_id')->constrained()->onDelete('cascade');
-            $table->string('role');
-            $table->string('responsibilities');
-            $table->string('required_skills');
-            $table->string('target_metrics');
+            $table->json('role'); 
+            $table->json('responsibilities'); 
+            $table->json('required_skills'); 
+            $table->json('target_metrics'); 
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+          
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

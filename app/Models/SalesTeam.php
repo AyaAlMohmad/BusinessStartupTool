@@ -13,10 +13,26 @@ class SalesTeam extends Model
         'responsibilities',
         'required_skills',
         'target_metrics',
+        'user_id',
     ];
 
+    protected $casts = [
+        'role' => 'array', 
+        'responsibilities' => 'array', 
+        'required_skills' => 'array', 
+        'target_metrics' => 'array', 
+    ];
+
+    
     public function salesStrategy()
     {
         return $this->belongsTo(SalesStrategy::class);
     }
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

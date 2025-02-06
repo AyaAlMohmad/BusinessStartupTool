@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('launch_milestones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade');
-            $table->string('description');
+            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade'); 
+            $table->json('description'); 
             $table->date('due_date');
             $table->string('status');
-            $table->json('dependencies')->nullable();
+            $table->json('dependencies')->nullable(); 
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

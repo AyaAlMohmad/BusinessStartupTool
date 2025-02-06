@@ -13,10 +13,24 @@ class SalesProcess extends Model
         'activities',
         'duration',
         'responsible_person',
+        'user_id',
     ];
 
+    protected $casts = [
+        'stage' => 'array', 
+        'activities' => 'array', 
+    ];
+
+  
     public function salesStrategy()
     {
         return $this->belongsTo(SalesStrategy::class);
     }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

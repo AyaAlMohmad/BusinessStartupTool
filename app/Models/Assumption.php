@@ -12,10 +12,25 @@ class Assumption extends Model
         'description',
         'test_method',
         'success_criteria',
+        'user_id',
     ];
 
+    protected $casts = [
+        'description' => 'array', 
+        'test_method' => 'array', 
+        'success_criteria' => 'array', 
+    ];
+
+    
     public function mvpDevelopment()
     {
-        return $this->belongsTo(MVPDevelopment::class);
+        return $this->belongsTo(MvpDevelopment::class);
     }
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

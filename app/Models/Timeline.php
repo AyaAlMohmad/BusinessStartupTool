@@ -12,14 +12,22 @@ class Timeline extends Model
         'name',
         'duration',
         'milestones',
+        'user_id',
     ];
 
     protected $casts = [
-        'milestones' => 'array',
+        'milestones' => 'array', 
     ];
 
+    
     public function mvpDevelopment()
     {
-        return $this->belongsTo(MVPDevelopment::class);
+        return $this->belongsTo(MvpDevelopment::class);
+    }
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

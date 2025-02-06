@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('mvp_developments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->json('description')->nullable(); 
             $table->timestamps();
         });
     }

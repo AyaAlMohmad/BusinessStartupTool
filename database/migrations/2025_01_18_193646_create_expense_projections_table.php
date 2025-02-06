@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('expense_projections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade');
-            $table->string('month');
-            $table->decimal('fixed_expenses', 10, 2);
-            $table->decimal('variable_expenses', 10, 2);
-            $table->json('assumptions');
+            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade'); 
+            $table->unsignedBigInteger('user_id'); 
+            $table->date('month');
+            $table->decimal('fixed_expenses', 10, 2); 
+            $table->decimal('variable_expenses', 10, 2); 
+            $table->json('assumptions'); 
             $table->timestamps();
+
+         
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

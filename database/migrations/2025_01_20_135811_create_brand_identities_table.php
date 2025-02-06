@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('brand_identities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('marketing_id')->constrained()->onDelete('cascade');
-            $table->json('values')->nullable();
-            $table->string('mission');
-            $table->string('vision');
-            $table->string('tone');
-            $table->string('visual_style');
+            $table->json('values')->nullable(); 
+            $table->json('mission'); 
+            $table->json('vision'); 
+            $table->json('tone'); 
+            $table->json('visual_style'); 
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

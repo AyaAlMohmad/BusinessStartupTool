@@ -14,12 +14,17 @@ return new class extends Migration
         Schema::create('content_strategies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('marketing_id')->constrained()->onDelete('cascade');
-            $table->string('type');
-            $table->string('description');
-            $table->string('frequency');
+            $table->json('type'); 
+            $table->json('description');
+            $table->json('frequency'); 
             $table->string('responsible_person');
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+   
     }
 
     /**

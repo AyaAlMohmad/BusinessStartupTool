@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_setup_id')->constrained()->onDelete('cascade');
-            $table->string('type');
-            $table->string('address');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->json('type')->nullable(); 
+            $table->json('address')->nullable(); 
             $table->integer('size');
             $table->decimal('monthly_cost', 10, 2);
             $table->timestamps();

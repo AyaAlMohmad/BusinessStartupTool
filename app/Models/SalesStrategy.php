@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class SalesStrategy extends Model
 {
     protected $table = 'sales_strategies';
+    protected $fillable = [
+        'user_id',
+        'strategy_name',
+        'description',
+    ];
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function salesChannels()
     {

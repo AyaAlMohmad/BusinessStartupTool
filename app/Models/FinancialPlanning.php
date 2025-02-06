@@ -2,10 +2,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class FinancialPlanning extends Model
 {
-    protected $fillable = [
+      protected $fillable = [
+        'business_setup_id',
+        'user_id',
         'startup_costs',
         'funding_sources',
         'revenue_projections',
@@ -23,6 +25,13 @@ class FinancialPlanning extends Model
         'cash_flow_projections' => 'array',
     ];
 
+    /**
+     * العلاقة مع BusinessSetup.
+     */
+    public function businessSetup(): BelongsTo
+    {
+        return $this->belongsTo(BusinessSetup::class);
+    }
     public function startupCosts()
     {
         return $this->hasMany(StartupCost::class);
@@ -41,5 +50,9 @@ class FinancialPlanning extends Model
     public function expenseProjections()
     {
         return $this->hasMany(ExpenseProjection::class);
+    }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

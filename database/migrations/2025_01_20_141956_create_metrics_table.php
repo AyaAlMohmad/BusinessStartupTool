@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('metrics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade');
-            $table->string('name');
+            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade'); 
+            $table->json('name'); 
             $table->decimal('target_value', 10, 2);
             $table->decimal('actual_value', 10, 2);
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

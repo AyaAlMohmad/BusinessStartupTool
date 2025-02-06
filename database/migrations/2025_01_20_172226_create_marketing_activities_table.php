@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('marketing_activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade');
-            $table->string('activity');
-            $table->string('timeline');
+            $table->foreignId('launch_preparation_id')->constrained()->onDelete('cascade'); 
+            $table->json('activity');
+            $table->json('timeline'); 
             $table->decimal('budget', 10, 2);
-            $table->string('status');
-            $table->json('metrics')->nullable();
-            $table->timestamps();
+            $table->json('status'); 
+            $table->json('metrics')->nullable(); 
+            $table->unsignedBigInteger('user_id'); 
+                        $table->timestamps();
+
+          
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

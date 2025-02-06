@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('business_ideas', function (Blueprint $table) {
             $table->id();
-            $table->json('skills_experience');
-            $table->json('passions_interests');
+            $table->unsignedBigInteger('user_id'); 
+            $table->json('skills_experience'); 
+            $table->json('passions_interests'); 
             $table->json('values_goals');
             $table->json('business_ideas');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -13,14 +13,24 @@ class PricingTier extends Model
         'price',
         'features',
         'target_customer',
+        'user_id',
     ];
 
     protected $casts = [
-        'features' => 'array',
+        'name' => 'array',
+        'features' => 'array', 
+        'target_customer' => 'array', 
     ];
 
+    
     public function salesStrategy()
     {
         return $this->belongsTo(SalesStrategy::class);
+    }
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

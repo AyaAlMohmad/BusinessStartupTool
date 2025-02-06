@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('business_setup_id')->constrained()->onDelete('cascade');
-            $table->string('type');
-            $table->string('provider');
-            $table->string('coverage');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->json('type'); 
+            $table->json('provider'); 
+            $table->json('coverage'); 
             $table->decimal('annual_cost', 10, 2);
             $table->timestamps();
         });

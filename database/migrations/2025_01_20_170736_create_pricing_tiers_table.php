@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('pricing_tiers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sales_strategy_id')->constrained()->onDelete('cascade');
-            $table->string('name');
+            $table->foreignId('sales_strategy_id')->constrained()->onDelete('cascade'); 
+            $table->json('name'); 
             $table->decimal('price', 10, 2);
-            $table->json('features')->nullable();
-            $table->string('target_customer');
+            $table->json('features')->nullable(); 
+            $table->json('target_customer'); 
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

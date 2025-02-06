@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade');
-            $table->json('must_have_features')->nullable();
-            $table->json('should_have_features')->nullable();
-            $table->json('nice_to_have_features')->nullable();
+            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade'); 
+            $table->json('must_have_features')->nullable(); 
+            $table->json('should_have_features')->nullable(); 
+            $table->json('nice_to_have_features')->nullable(); 
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+          
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

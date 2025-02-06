@@ -14,14 +14,27 @@ class RiskAssessment extends Model
         'probability',
         'mitigation_strategies',
         'contingency_plan',
+        'user_id',
     ];
 
     protected $casts = [
-        'mitigation_strategies' => 'array',
+        'description' => 'array', 
+        'impact' => 'array', 
+        'probability' => 'array', 
+        'mitigation_strategies' => 'array', 
+        'contingency_plan' => 'array', 
     ];
 
+   
     public function launchPreparation()
     {
         return $this->belongsTo(LaunchPreparation::class);
     }
+
+  
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

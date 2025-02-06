@@ -12,10 +12,23 @@ class Metric extends Model
         'name',
         'target_value',
         'actual_value',
+        'user_id',
     ];
 
+    protected $casts = [
+        'name' => 'array', 
+    ];
+
+    
     public function mvpDevelopment()
     {
-        return $this->belongsTo(MVPDevelopment::class);
+        return $this->belongsTo(MvpDevelopment::class);
     }
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

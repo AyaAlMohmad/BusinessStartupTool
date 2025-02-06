@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('marketings', function (Blueprint $table) {
             $table->id();
-            $table->text('audience_description');
-            $table->text('problem_statement');
-            $table->text('solution_overview');
+            $table->json('audience_description'); 
+            $table->json('problem_statement'); 
+            $table->json('solution_overview'); 
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

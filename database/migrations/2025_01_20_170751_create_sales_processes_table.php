@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('sales_processes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sales_strategy_id')->constrained()->onDelete('cascade');
-            $table->string('stage');
-            $table->string('activities');
+            $table->foreignId('sales_strategy_id')->constrained()->onDelete('cascade'); 
+            $table->json('stage'); 
+            $table->json('activities'); 
             $table->string('duration');
             $table->string('responsible_person');
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

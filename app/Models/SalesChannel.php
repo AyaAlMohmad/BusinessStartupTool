@@ -13,10 +13,24 @@ class SalesChannel extends Model
         'description',
         'target_revenue',
         'commission_structure',
+        'user_id',
     ];
 
+    protected $casts = [
+        'name' => 'array', 
+        'description' => 'array',
+    ];
+
+   
     public function salesStrategy()
     {
         return $this->belongsTo(SalesStrategy::class);
     }
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

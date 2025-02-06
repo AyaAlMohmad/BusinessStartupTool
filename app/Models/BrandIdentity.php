@@ -15,14 +15,27 @@ class BrandIdentity extends Model
         'vision',
         'tone',
         'visual_style',
+        'user_id',
     ];
 
     protected $casts = [
         'values' => 'array',
+        'mission' => 'array', 
+        'vision' => 'array', 
+        'tone' => 'array', 
+        'visual_style' => 'array', 
     ];
 
+   
     public function marketing()
     {
         return $this->belongsTo(Marketing::class);
     }
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

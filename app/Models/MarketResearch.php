@@ -14,6 +14,7 @@ class MarketResearch extends Model
         'must_have_solutions',
         'should_have_solutions',
         'nice_to_have_solutions',
+        'user_id',
     ];
 
     protected $casts = [
@@ -21,4 +22,9 @@ class MarketResearch extends Model
         'should_have_solutions' => 'array',
         'nice_to_have_solutions' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('assumptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade');
-            $table->string('description');
-            $table->string('test_method');
-            $table->string('success_criteria');
+            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade'); 
+            $table->json('description'); 
+            $table->json('test_method');
+            $table->json('success_criteria');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 class LaunchPreparation extends Model
 {
     protected $table = 'launch_preparations';
+    protected $fillable = [
+        'user_id',
+        'preparation_name',
+        'description',
+    ];
+
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function launchChecklists()
     {

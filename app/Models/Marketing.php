@@ -10,8 +10,20 @@ class Marketing extends Model
         'audience_description',
         'problem_statement',
         'solution_overview',
+        'user_id', 
     ];
 
+    protected $casts = [
+        'audience_description' => 'array',
+        'problem_statement' => 'array', 
+        'solution_overview' => 'array', 
+    ];
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function marketingChannels()
     {
         return $this->hasMany(MarketingChannel::class);

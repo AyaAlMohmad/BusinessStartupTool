@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('funding_sources', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade');
-            $table->string('source');
-            $table->string('type');
+            $table->foreignId('financial_planning_id')->constrained()->onDelete('cascade'); 
+            $table->unsignedBigInteger('user_id'); 
+            $table->json('source'); 
+            $table->json('type'); 
             $table->decimal('amount', 15, 2);
-            $table->string('status');
-            $table->string('terms');
+            $table->json('status'); 
+            $table->json('terms'); 
             $table->timestamps();
+
+           
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

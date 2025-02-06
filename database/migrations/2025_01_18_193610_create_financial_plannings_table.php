@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('financial_plannings', function (Blueprint $table) {
             $table->id();
-            $table->json('startup_costs');
-            $table->json('funding_sources');
-            $table->json('revenue_projections');
+            $table->foreignId('business_setup_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->json('startup_costs'); 
+            $table->json('funding_sources'); 
+            $table->json('revenue_projections'); 
             $table->json('expense_projections');
-            $table->json('breakeven_analysis');
-            $table->json('cash_flow_projections');
+            $table->json('breakeven_analysis'); 
+            $table->json('cash_flow_projections'); 
             $table->timestamps();
         });
     }

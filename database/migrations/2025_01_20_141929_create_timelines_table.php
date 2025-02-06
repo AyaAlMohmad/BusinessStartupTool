@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('timelines', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade');
+            $table->foreignId('mvp_development_id')->constrained()->onDelete('cascade'); 
             $table->string('name');
             $table->string('duration');
-            $table->json('milestones')->nullable();
+            $table->json('milestones')->nullable(); 
+            $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
+
+            
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+
     }
 
     /**
