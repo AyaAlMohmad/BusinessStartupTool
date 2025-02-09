@@ -5,9 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\LaunchPreparation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaunchPreparationController extends Controller
-{ public function index()
+{
+    public function index()
     {
         return LaunchPreparation::with(['launchChecklists', 'marketingActivities', 'riskAssessments', 'launchMilestones'])->get();
     }
@@ -41,28 +43,40 @@ class LaunchPreparationController extends Controller
             'launch_milestones.*.dependencies' => 'nullable|array',
         ]);
 
-        $launchPreparation = LaunchPreparation::create();
+        // إضافة user_id للمستخدم الحالي
+        $validatedData['user_id'] = Auth::id();
 
+        // إنشاء LaunchPreparation
+        $launchPreparation = LaunchPreparation::create(['user_id' => $validatedData['user_id']]);
+
+        // إنشاء LaunchChecklists
         if (isset($validatedData['launch_checklists'])) {
             foreach ($validatedData['launch_checklists'] as $checklist) {
+                $checklist['user_id'] = $validatedData['user_id'];
                 $launchPreparation->launchChecklists()->create($checklist);
             }
         }
 
+        // إنشاء MarketingActivities
         if (isset($validatedData['marketing_activities'])) {
             foreach ($validatedData['marketing_activities'] as $activity) {
+                $activity['user_id'] = $validatedData['user_id'];
                 $launchPreparation->marketingActivities()->create($activity);
             }
         }
 
+        // إنشاء RiskAssessments
         if (isset($validatedData['risk_assessments'])) {
             foreach ($validatedData['risk_assessments'] as $risk) {
+                $risk['user_id'] = $validatedData['user_id'];
                 $launchPreparation->riskAssessments()->create($risk);
             }
         }
 
+        // إنشاء LaunchMilestones
         if (isset($validatedData['launch_milestones'])) {
             foreach ($validatedData['launch_milestones'] as $milestone) {
+                $milestone['user_id'] = $validatedData['user_id'];
                 $launchPreparation->launchMilestones()->create($milestone);
             }
         }
@@ -110,30 +124,38 @@ class LaunchPreparationController extends Controller
             'launch_milestones.*.dependencies' => 'nullable|array',
         ]);
 
+        // تحديث LaunchChecklists
         if (isset($validatedData['launch_checklists'])) {
             $launchPreparation->launchChecklists()->delete();
             foreach ($validatedData['launch_checklists'] as $checklist) {
+                $checklist['user_id'] = $launchPreparation->user_id;
                 $launchPreparation->launchChecklists()->create($checklist);
             }
         }
 
+        // تحديث MarketingActivities
         if (isset($validatedData['marketing_activities'])) {
             $launchPreparation->marketingActivities()->delete();
             foreach ($validatedData['marketing_activities'] as $activity) {
+                $activity['user_id'] = $launchPreparation->user_id;
                 $launchPreparation->marketingActivities()->create($activity);
             }
         }
 
+        // تحديث RiskAssessments
         if (isset($validatedData['risk_assessments'])) {
             $launchPreparation->riskAssessments()->delete();
             foreach ($validatedData['risk_assessments'] as $risk) {
+                $risk['user_id'] = $launchPreparation->user_id;
                 $launchPreparation->riskAssessments()->create($risk);
             }
         }
 
+        // تحديث LaunchMilestones
         if (isset($validatedData['launch_milestones'])) {
             $launchPreparation->launchMilestones()->delete();
             foreach ($validatedData['launch_milestones'] as $milestone) {
+                $milestone['user_id'] = $launchPreparation->user_id;
                 $launchPreparation->launchMilestones()->create($milestone);
             }
         }

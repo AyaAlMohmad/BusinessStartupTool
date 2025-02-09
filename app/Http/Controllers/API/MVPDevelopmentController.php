@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\MVPDevelopment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MVPDevelopmentController extends Controller
 {
@@ -20,39 +21,51 @@ class MVPDevelopmentController extends Controller
             'features.should_have_features' => 'nullable|array',
             'features.nice_to_have_features' => 'nullable|array',
             'assumptions' => 'nullable|array',
-            'assumptions.*.description' => 'required|string',
-            'assumptions.*.test_method' => 'required|string',
-            'assumptions.*.success_criteria' => 'required|string',
+            'assumptions.*.description' => 'required|array',
+            'assumptions.*.test_method' => 'required|array',
+            'assumptions.*.success_criteria' => 'required|array',
             'timelines' => 'nullable|array',
-            'timelines.*.name' => 'required|string',
-            'timelines.*.duration' => 'required|string',
+            'timelines.*.name' => 'required|array',
+            'timelines.*.duration' => 'required|array',
             'timelines.*.milestones' => 'nullable|array',
             'metrics' => 'nullable|array',
-            'metrics.*.name' => 'required|string',
+            'metrics.*.name' => 'required|array',
             'metrics.*.target_value' => 'required|numeric',
             'metrics.*.actual_value' => 'required|numeric',
         ]);
 
-        $mvpDevelopment = MVPDevelopment::create();
+        // إضافة user_id للمستخدم الحالي
+        $validatedData['user_id'] = Auth::id();
 
+        // إنشاء MVPDevelopment
+        $mvpDevelopment = MVPDevelopment::create(['user_id' => $validatedData['user_id']]);
+
+        // إنشاء Features
         if (isset($validatedData['features'])) {
+            $validatedData['features']['user_id'] = $validatedData['user_id'];
             $mvpDevelopment->features()->create($validatedData['features']);
         }
 
+        // إنشاء Assumptions
         if (isset($validatedData['assumptions'])) {
             foreach ($validatedData['assumptions'] as $assumption) {
+                $assumption['user_id'] = $validatedData['user_id'];
                 $mvpDevelopment->assumptions()->create($assumption);
             }
         }
 
+        // إنشاء Timelines
         if (isset($validatedData['timelines'])) {
             foreach ($validatedData['timelines'] as $timeline) {
+                $timeline['user_id'] = $validatedData['user_id'];
                 $mvpDevelopment->timelines()->create($timeline);
             }
         }
 
+        // إنشاء Metrics
         if (isset($validatedData['metrics'])) {
             foreach ($validatedData['metrics'] as $metric) {
+                $metric['user_id'] = $validatedData['user_id'];
                 $mvpDevelopment->metrics()->create($metric);
             }
         }
@@ -74,40 +87,48 @@ class MVPDevelopmentController extends Controller
             'features.should_have_features' => 'nullable|array',
             'features.nice_to_have_features' => 'nullable|array',
             'assumptions' => 'nullable|array',
-            'assumptions.*.description' => 'sometimes|required|string',
-            'assumptions.*.test_method' => 'sometimes|required|string',
-            'assumptions.*.success_criteria' => 'sometimes|required|string',
+            'assumptions.*.description' => 'sometimes|required|array',
+            'assumptions.*.test_method' => 'sometimes|required|array',
+            'assumptions.*.success_criteria' => 'sometimes|required|array',
             'timelines' => 'nullable|array',
-            'timelines.*.name' => 'sometimes|required|string',
-            'timelines.*.duration' => 'sometimes|required|string',
+            'timelines.*.name' => 'sometimes|required|array',
+            'timelines.*.duration' => 'sometimes|required|array',
             'timelines.*.milestones' => 'nullable|array',
             'metrics' => 'nullable|array',
-            'metrics.*.name' => 'sometimes|required|string',
+            'metrics.*.name' => 'sometimes|required|array',
             'metrics.*.target_value' => 'sometimes|required|numeric',
             'metrics.*.actual_value' => 'sometimes|required|numeric',
         ]);
 
+        // تحديث أو إنشاء Features
         if (isset($validatedData['features'])) {
+            $validatedData['features']['user_id'] = $mvpDevelopment->user_id;
             $mvpDevelopment->features()->updateOrCreate([], $validatedData['features']);
         }
 
+        // تحديث أو إنشاء Assumptions
         if (isset($validatedData['assumptions'])) {
             $mvpDevelopment->assumptions()->delete();
             foreach ($validatedData['assumptions'] as $assumption) {
+                $assumption['user_id'] = $mvpDevelopment->user_id;
                 $mvpDevelopment->assumptions()->create($assumption);
             }
         }
 
+        // تحديث أو إنشاء Timelines
         if (isset($validatedData['timelines'])) {
             $mvpDevelopment->timelines()->delete();
             foreach ($validatedData['timelines'] as $timeline) {
+                $timeline['user_id'] = $mvpDevelopment->user_id;
                 $mvpDevelopment->timelines()->create($timeline);
             }
         }
 
+        // تحديث أو إنشاء Metrics
         if (isset($validatedData['metrics'])) {
             $mvpDevelopment->metrics()->delete();
             foreach ($validatedData['metrics'] as $metric) {
+                $metric['user_id'] = $mvpDevelopment->user_id;
                 $mvpDevelopment->metrics()->create($metric);
             }
         }

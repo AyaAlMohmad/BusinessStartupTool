@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\BusinessIdea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BusinessIdeaController extends Controller
 {
@@ -20,7 +21,7 @@ class BusinessIdeaController extends Controller
             'values_goals' => 'required|array',
             'business_ideas' => 'required|array',
         ]);
-
+        $data['user_id'] = Auth::id();
         $businessIdea = BusinessIdea::create($data);
         return response()->json($businessIdea, 201);
     }
