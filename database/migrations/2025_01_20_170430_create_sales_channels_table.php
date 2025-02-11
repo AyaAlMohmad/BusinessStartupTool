@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('name'); 
             $table->json('description'); 
             $table->decimal('target_revenue', 10, 2);
-            $table->string('commission_structure');
+            $table->json('commission_structure');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

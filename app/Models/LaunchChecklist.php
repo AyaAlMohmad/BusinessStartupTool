@@ -19,6 +19,7 @@ class LaunchChecklist extends Model
     ];
 
     protected $casts = [
+        'notes'=> 'array',
         'category' => 'array', 
         'task' => 'array',
         'status' => 'array', 

@@ -23,21 +23,21 @@ class LaunchPreparationController extends Controller
             'launch_checklists.*.due_date' => 'required|date',
             'launch_checklists.*.status' => 'required|string',
             'launch_checklists.*.assignee' => 'required|string',
-            'launch_checklists.*.notes' => 'nullable|string',
+            'launch_checklists.*.notes' => 'nullable|array', // تغيير من string إلى array
             'marketing_activities' => 'nullable|array',
-            'marketing_activities.*.activity' => 'required|string',
+            'marketing_activities.*.activity' => 'required|array', // تغيير من string إلى array
             'marketing_activities.*.timeline' => 'required|string',
             'marketing_activities.*.budget' => 'required|numeric',
             'marketing_activities.*.status' => 'required|string',
             'marketing_activities.*.metrics' => 'nullable|array',
             'risk_assessments' => 'nullable|array',
-            'risk_assessments.*.description' => 'required|string',
+            'risk_assessments.*.description' => 'required|array', // تغيير من string إلى array
             'risk_assessments.*.impact' => 'required|string',
             'risk_assessments.*.probability' => 'required|string',
             'risk_assessments.*.mitigation_strategies' => 'nullable|array',
-            'risk_assessments.*.contingency_plan' => 'nullable|string',
+            'risk_assessments.*.contingency_plan' => 'nullable|array', // تغيير من string إلى array
             'launch_milestones' => 'nullable|array',
-            'launch_milestones.*.description' => 'required|string',
+            'launch_milestones.*.description' => 'required|array', // تغيير من string إلى array
             'launch_milestones.*.due_date' => 'required|date',
             'launch_milestones.*.status' => 'required|string',
             'launch_milestones.*.dependencies' => 'nullable|array',
@@ -96,31 +96,30 @@ class LaunchPreparationController extends Controller
     public function update(Request $request, $id)
     {
         $launchPreparation = LaunchPreparation::findOrFail($id);
-
         $validatedData = $request->validate([
             'launch_checklists' => 'nullable|array',
-            'launch_checklists.*.category' => 'sometimes|required|string',
-            'launch_checklists.*.task' => 'sometimes|required|string',
-            'launch_checklists.*.due_date' => 'sometimes|required|date',
-            'launch_checklists.*.status' => 'sometimes|required|string',
-            'launch_checklists.*.assignee' => 'sometimes|required|string',
-            'launch_checklists.*.notes' => 'nullable|string',
+            'launch_checklists.*.category' => 'required|string',
+            'launch_checklists.*.task' => 'required|string',
+            'launch_checklists.*.due_date' => 'required|date',
+            'launch_checklists.*.status' => 'required|string',
+            'launch_checklists.*.assignee' => 'required|string',
+            'launch_checklists.*.notes' => 'nullable|array', // تغيير من string إلى array
             'marketing_activities' => 'nullable|array',
-            'marketing_activities.*.activity' => 'sometimes|required|string',
-            'marketing_activities.*.timeline' => 'sometimes|required|string',
-            'marketing_activities.*.budget' => 'sometimes|required|numeric',
-            'marketing_activities.*.status' => 'sometimes|required|string',
+            'marketing_activities.*.activity' => 'required|array', // تغيير من string إلى array
+            'marketing_activities.*.timeline' => 'required|string',
+            'marketing_activities.*.budget' => 'required|numeric',
+            'marketing_activities.*.status' => 'required|string',
             'marketing_activities.*.metrics' => 'nullable|array',
             'risk_assessments' => 'nullable|array',
-            'risk_assessments.*.description' => 'sometimes|required|string',
-            'risk_assessments.*.impact' => 'sometimes|required|string',
-            'risk_assessments.*.probability' => 'sometimes|required|string',
+            'risk_assessments.*.description' => 'required|array', // تغيير من string إلى array
+            'risk_assessments.*.impact' => 'required|string',
+            'risk_assessments.*.probability' => 'required|string',
             'risk_assessments.*.mitigation_strategies' => 'nullable|array',
-            'risk_assessments.*.contingency_plan' => 'nullable|string',
+            'risk_assessments.*.contingency_plan' => 'nullable|array', // تغيير من string إلى array
             'launch_milestones' => 'nullable|array',
-            'launch_milestones.*.description' => 'sometimes|required|string',
-            'launch_milestones.*.due_date' => 'sometimes|required|date',
-            'launch_milestones.*.status' => 'sometimes|required|string',
+            'launch_milestones.*.description' => 'required|array', // تغيير من string إلى array
+            'launch_milestones.*.due_date' => 'required|date',
+            'launch_milestones.*.status' => 'required|string',
             'launch_milestones.*.dependencies' => 'nullable|array',
         ]);
 

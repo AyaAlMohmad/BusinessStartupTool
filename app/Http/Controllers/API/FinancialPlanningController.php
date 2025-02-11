@@ -17,6 +17,7 @@ class FinancialPlanningController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'business_setup_id' => 'nullable|integer', 
             'startup_costs' => 'required|array',
             'funding_sources' => 'required|array',
             'revenue_projections' => 'required|array',

@@ -17,7 +17,8 @@ class SalesProcess extends Model
     ];
 
     protected $casts = [
-        'stage' => 'array', 
+        'stage' => 'array',
+         'responsible_person' => 'array', 
         'activities' => 'array', 
     ];
 

@@ -17,6 +17,7 @@ class SalesChannel extends Model
     ];
 
     protected $casts = [
+        'commission_structure'=>'array',
         'name' => 'array', 
         'description' => 'array',
     ];

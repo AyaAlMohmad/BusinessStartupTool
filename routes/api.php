@@ -38,7 +38,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']); 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-
+Route::middleware('auth:sanctum')->group(function () {
 // Business Idea Routes
 Route::prefix('business-ideas')->group(function() {
     Route::get('/', [BusinessIdeaController::class, 'index']);
@@ -46,7 +46,7 @@ Route::prefix('business-ideas')->group(function() {
 });
 
 // Business Setup Routes 
-Route::prefix('business-setups')->group(function() {
+Route::prefix('business-setups')->middleware('auth:sanctum')->group(function() {
     Route::get('/', [BusinessSetupController::class, 'index']);
     Route::post('/', [BusinessSetupController::class, 'store']);
     Route::get('/{id}', [BusinessSetupController::class, 'show']);
@@ -73,3 +73,4 @@ Route::apiResource('mvp-development', MVPDevelopmentController::class);
 Route::apiResource('launch-preparations', LaunchPreparationController::class);
 
 Route::apiResource('sales-strategies', SalesStrategyController::class);
+});

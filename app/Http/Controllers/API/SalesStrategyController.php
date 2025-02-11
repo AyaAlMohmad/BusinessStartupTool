@@ -124,7 +124,7 @@ class SalesStrategyController extends Controller
                 $salesStrategy->pricingTiers()->create($tier);
             }
         }
-
+     
         if (isset($validatedData['sales_processes'])) {
             $salesStrategy->salesProcesses()->delete();
             foreach ($validatedData['sales_processes'] as $process) {

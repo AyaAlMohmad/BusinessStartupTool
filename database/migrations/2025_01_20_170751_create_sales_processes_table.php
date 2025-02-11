@@ -17,7 +17,7 @@ return new class extends Migration
             $table->json('stage'); 
             $table->json('activities'); 
             $table->string('duration');
-            $table->string('responsible_person');
+            $table->json('responsible_person');
             $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
 

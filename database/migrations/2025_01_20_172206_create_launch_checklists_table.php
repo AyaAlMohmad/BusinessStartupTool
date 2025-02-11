@@ -19,7 +19,8 @@ return new class extends Migration
             $table->date('due_date');
             $table->json('status');
             $table->string('assignee'); 
-            $table->text('notes')->nullable();
+            // $table->text('notes')->nullable();
+            $table->json('notes'); // بدلاً من $table->string('notes');
             $table->unsignedBigInteger('user_id'); 
             $table->timestamps();
 
