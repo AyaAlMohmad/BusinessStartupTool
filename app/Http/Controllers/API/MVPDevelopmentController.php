@@ -34,19 +34,16 @@ class MVPDevelopmentController extends Controller
             'metrics.*.actual_value' => 'required|numeric',
         ]);
 
-        // إضافة user_id للمستخدم الحالي
         $validatedData['user_id'] = Auth::id();
 
-        // إنشاء MVPDevelopment
         $mvpDevelopment = MVPDevelopment::create(['user_id' => $validatedData['user_id']]);
 
-        // إنشاء Features
         if (isset($validatedData['features'])) {
             $validatedData['features']['user_id'] = $validatedData['user_id'];
             $mvpDevelopment->features()->create($validatedData['features']);
         }
 
-        // إنشاء Assumptions
+
         if (isset($validatedData['assumptions'])) {
             foreach ($validatedData['assumptions'] as $assumption) {
                 $assumption['user_id'] = $validatedData['user_id'];
@@ -54,7 +51,6 @@ class MVPDevelopmentController extends Controller
             }
         }
 
-        // إنشاء Timelines
         if (isset($validatedData['timelines'])) {
             foreach ($validatedData['timelines'] as $timeline) {
                 $timeline['user_id'] = $validatedData['user_id'];
@@ -62,7 +58,6 @@ class MVPDevelopmentController extends Controller
             }
         }
 
-        // إنشاء Metrics
         if (isset($validatedData['metrics'])) {
             foreach ($validatedData['metrics'] as $metric) {
                 $metric['user_id'] = $validatedData['user_id'];
@@ -100,13 +95,13 @@ class MVPDevelopmentController extends Controller
             'metrics.*.actual_value' => 'required|numeric',
         ]);
 
-        // تحديث أو إنشاء Features
+
         if (isset($validatedData['features'])) {
             $validatedData['features']['user_id'] = $mvpDevelopment->user_id;
             $mvpDevelopment->features()->updateOrCreate([], $validatedData['features']);
         }
 
-        // تحديث أو إنشاء Assumptions
+
         if (isset($validatedData['assumptions'])) {
             $mvpDevelopment->assumptions()->delete();
             foreach ($validatedData['assumptions'] as $assumption) {
@@ -115,7 +110,6 @@ class MVPDevelopmentController extends Controller
             }
         }
 
-        // تحديث أو إنشاء Timelines
         if (isset($validatedData['timelines'])) {
             $mvpDevelopment->timelines()->delete();
             foreach ($validatedData['timelines'] as $timeline) {
